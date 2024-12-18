@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   after_destroy_commit { broadcast_item_count }
 
   scope :completed, -> { where.not(completed_at: nil) }
+  scope :uncompleted, -> { where(completed_at: nil) }
 
   def completed?
     completed_at.present?

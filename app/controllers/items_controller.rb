@@ -5,6 +5,16 @@ class ItemsController < ApplicationController
     @items = Item.order(id: :desc)
   end
 
+  def completed
+    @items = Item.completed.order(id: :desc)
+    render :index
+  end
+
+  def uncompleted
+    @items = Item.uncompleted.order(id: :desc)
+    render :index
+  end
+
   def create
     @item = Item.new(item_params)
 

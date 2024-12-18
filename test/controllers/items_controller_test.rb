@@ -10,6 +10,24 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get completed items" do
+    get completed_items_url
+    assert_response :success
+    assert_not_nil assigns(:items)
+    assigns(:items).each do |item|
+      assert_not_nil item.completed_at
+    end
+  end
+
+  test "should get uncompleted items" do
+    get uncompleted_items_url
+    assert_response :success
+    assert_not_nil assigns(:items)
+    assigns(:items).each do |item|
+      assert_nil item.completed_at
+    end
+  end
+
   test "should create item" do
     assert_difference("Item.count") do
       post items_url, params: { item: { body: @item.body, completed_at: @item.completed_at } }

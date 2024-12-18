@@ -1,7 +1,7 @@
 <div id="<%= dom_id item %>" class="flex items-center bg-white <%= item.completed? ? 'text-slate-400' : 'text-slate-600' %> w-[550px] text-2xl h-[65px] shadow border group">
   <%= complete_button(item) %>
 
-  <p class="font-sans font-normal <%= item.completed? ? 'line-through' : '' %>"><%= item.body %></p>
+  <p class="font-sans font-normal <%= item.completed? ? 'line-through' : '' %> ml-4"><%= item.body %></p>
 
   <div class="ml-auto mr-4 hidden group-hover:block">
     <%= button_to item, method: :delete, class: 'text-slate-400 px-4 py-2 rounded' do %>
