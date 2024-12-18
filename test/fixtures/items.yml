@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  body: MyString
-  completed_at: 2024-12-16 16:37:46
+  body: Groceries
+  completed_at:
 
 two:
-  body: MyString
+  body: Bills
   completed_at: 2024-12-16 16:37:46

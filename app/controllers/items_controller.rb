@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ edit update destroy ]
+  before_action :set_item, only: %i[ edit update destroy toggle_completed ]
 
   def index
     @items = Item.order(id: :desc)
@@ -43,12 +43,25 @@ class ItemsController < ApplicationController
     end
   end
 
+  def toggle_completed
+    if @item.completed?
+      @item.update(completed_at: nil)
+    else
+      @item.update(completed_at: DateTime.now)
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to items_url, notice: "Item was updated" }
+      format.json { head :no_content }
+    end
+  end
+
   private
     def set_item
       @item = Item.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def item_params
       params.expect(item: [ :body, :completed_at ])
     end
