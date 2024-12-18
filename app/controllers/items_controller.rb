@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ edit update ]
+  before_action :set_item, only: %i[ edit update destroy ]
 
   def index
     @items = Item.order(id: :desc)
@@ -30,6 +30,15 @@ class ItemsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @item.destroy
+
+    respond_to do |format|
+      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 
