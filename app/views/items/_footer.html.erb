@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "item_counter" do %>
+    <footer class="flex flex-col items-center">
+    <div class="w-full bg-white shadow-md border-[1px] border-slate-200 text-slate-600 font-extralight p-2">
+      <%= pluralize items.count, "item" %> left
+    </div>
+    <div class="w-[99%] h-[2px] p-[1px] bg-white border-[1px] border-slate-200"></div>
+    <div class="w-[98%] h-[2px] p-[1px] bg-white border-[1px] border-slate-200"></div>
+  </footer>
+<% end %>
