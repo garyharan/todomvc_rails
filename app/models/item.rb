@@ -1,21 +1,18 @@
 class Item < ApplicationRecord
-  after_create_commit { broadcast_item_count }
-  after_update_commit { broadcast_item_count }
-  after_destroy_commit { broadcast_item_count }
-
+  scope :active, -> { where(completed_at: nil) }
   scope :completed, -> { where.not(completed_at: nil) }
-  scope :uncompleted, -> { where(completed_at: nil) }
+
+  scope :grouped, -> {
+    select("
+      items.*,
+      CASE
+      WHEN completed_at IS NOT NULL THEN 'completed'
+      ELSE 'active'
+      END AS completion_status
+    ").order(id: :desc).group_by(&:completion_status)
+  }
 
   def completed?
     completed_at.present?
-  end
-
-  private
-
-  def broadcast_item_count
-    broadcast_replace_to "items",
-      target: "item_counter",
-      partial: "items/footer",
-      locals: { items: Item.all }
   end
 end

@@ -1,2 +1,2 @@
-<%= turbo_stream.prepend "items", partial: "item", locals: { item: @item } %>
+<%= turbo_stream.prepend "active_items", partial: "item", locals: { item: @item } %>
 <%= turbo_stream.replace "new_item_form", partial: "form", locals: { item: Item.new } %>

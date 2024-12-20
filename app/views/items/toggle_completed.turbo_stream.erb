@@ -1,3 +1,11 @@
-<%= turbo_stream.replace @item do %>
-  <%= render @item %>
+<%= turbo_stream.remove @item %>
+
+<% if @item.completed? %>
+  <%= turbo_stream.prepend "completed_items", @item %>
+<% else %>
+  <%= turbo_stream.prepend "active_items", @item %>
+<% end %>
+
+<%= turbo_stream.replace "active_count" do %>
+  <%= pluralize Item.active.count, "item" %>
 <% end %>

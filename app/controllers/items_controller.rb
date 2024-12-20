@@ -1,18 +1,14 @@
 class ItemsController < ApplicationController
+  before_action :set_items, only: %i[ index active completed ]
   before_action :set_item, only: %i[ edit update destroy toggle_completed ]
 
   def index
-    @items = Item.order(id: :desc)
+  end
+
+  def active
   end
 
   def completed
-    @items = Item.completed.order(id: :desc)
-    render :index
-  end
-
-  def uncompleted
-    @items = Item.uncompleted.order(id: :desc)
-    render :index
   end
 
   def create
@@ -67,7 +63,25 @@ class ItemsController < ApplicationController
     end
   end
 
+  def toggle_all
+    if Item.count == Item.completed.count
+      Item.all.each { |item| item.update(completed_at: nil) }
+    else
+      Item.all.each { |item| item.update(completed_at: DateTime.now) }
+    end
+
+    respond_to do |format|
+      format.turbo_stream { }
+      format.html { redirect_to items_url, notice: "Item was updated" }
+      format.json { head :no_content }
+    end
+  end
+
   private
+    def set_items
+      @items = Item.grouped
+    end
+
     def set_item
       @item = Item.find(params.expect(:id))
     end

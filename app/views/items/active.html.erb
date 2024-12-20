@@ -17,12 +17,6 @@
           <%= render item %>
         <% end %>
       <% end %>
-
-      <%= turbo_frame_tag "completed_items" do %>
-        <% Array(@items["completed"]).each do |item| %>
-          <%= render item %>
-        <% end %>
-      <% end %>
     </div>
 
     <%= render partial: "footer", locals: { active_count: Item.active.count } %>

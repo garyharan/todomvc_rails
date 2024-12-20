@@ -10,21 +10,21 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get active items" do
+    get active_items_url
+    assert_response :success
+    assert_not_nil assigns(:items)
+    assigns(:items)["active"].each do |item|
+      assert_nil item.completed_at
+    end
+  end
+
   test "should get completed items" do
     get completed_items_url
     assert_response :success
     assert_not_nil assigns(:items)
-    assigns(:items).each do |item|
+    assigns(:items)["completed"].each do |item|
       assert_not_nil item.completed_at
-    end
-  end
-
-  test "should get uncompleted items" do
-    get uncompleted_items_url
-    assert_response :success
-    assert_not_nil assigns(:items)
-    assigns(:items).each do |item|
-      assert_nil item.completed_at
     end
   end
 
@@ -57,6 +57,18 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     patch toggle_completed_item_url(@item)
     @item.reload
     assert_nil @item.completed_at
+  end
+
+  test "should toggle all items" do
+    patch toggle_all_items_url
+    Item.all.each do |item|
+      assert item.completed?
+    end
+
+    patch toggle_all_items_url
+    Item.all.each do |item|
+      assert_not item.completed?
+    end
   end
 
   test "should update item" do

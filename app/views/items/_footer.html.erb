@@ -1,13 +1,13 @@
-<%= turbo_frame_tag "item_counter" do %>
+<%= turbo_frame_tag "footer" do %>
     <footer class="flex flex-col items-center">
     <div class="flex flex-row w-full bg-white shadow-md border-[1px] border-slate-200 items-center">
       <div class="text-slate-600 font-extralight p-2 basis-1/4">
-        <%= pluralize Item.uncompleted.count, "item" %> left
+        <%= render partial: "active_count", locals: { active_count: active_count } %>
       </div>
       <div class="basis-1/2 flex justify-center gap-2">
-        <%= link_to 'All', items_path, data: { turbo: false } %>
-        <%= link_to 'Active', uncompleted_items_path, data: { turbo: false } %>
-        <%= link_to 'Completed', completed_items_path, data: { turbo: false } %>
+        <%= link_to 'All', items_path, target: '_top', class: (current_page?(items_path) ? 'border rounded border-red-500 px-2' : '') %>
+        <%= link_to 'Active', active_items_path, target: '_top', class: (current_page?(active_items_path) ? 'border rounded border-red-500 px-2' : '') %>
+        <%= link_to 'Completed', completed_items_path, target: '_top', class: (current_page?(completed_items_path) ? 'border rounded border-red-500 px-2' : '') %>
       </div>
     </div>
     <div class="w-[99%] h-[2px] p-[1px] bg-white border-[1px] border-slate-200"></div>
