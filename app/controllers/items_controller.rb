@@ -70,9 +70,23 @@ class ItemsController < ApplicationController
       Item.all.each { |item| item.update(completed_at: DateTime.now) }
     end
 
+    @items = Item.grouped
+
     respond_to do |format|
-      format.turbo_stream { }
-      format.html { redirect_to items_url, notice: "Item was updated" }
+      format.turbo_stream
+      format.html { redirect_to items_url, notice: "Items were updated" }
+      format.json { head :no_content }
+    end
+  end
+
+  def clear_completed
+    Item.completed.destroy_all
+
+    @items = Item.grouped
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to items_url, notice: "Completed items were successfully cleared." }
       format.json { head :no_content }
     end
   end

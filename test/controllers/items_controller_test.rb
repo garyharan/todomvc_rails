@@ -71,6 +71,14 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "should clear completed items" do
+    assert_difference("Item.completed.count", -Item.completed.count) do
+      delete clear_completed_items_url
+    end
+
+    assert_redirected_to items_url
+  end
+
   test "should update item" do
     patch item_url(@item), params: { item: { body: @item.body, completed_at: @item.completed_at } }
     assert_redirected_to item_url(@item)

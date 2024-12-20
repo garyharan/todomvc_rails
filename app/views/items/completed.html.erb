@@ -12,9 +12,11 @@
     </div>
 
     <div class="flex flex-col">
-      <%= turbo_frame_tag "completed_items" do %>
-        <% Array(@items["completed"]).each do |item| %>
-          <%= render item %>
+      <%= turbo_frame_tag "items" do %>
+        <%= turbo_frame_tag "completed_items" do %>
+          <% Array(@items["completed"]).each do |item| %>
+            <%= render item %>
+          <% end %>
         <% end %>
       <% end %>
     </div>

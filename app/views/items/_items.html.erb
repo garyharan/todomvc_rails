@@ -1,11 +1,13 @@
-<%= turbo_frame_tag "active_items" do %>
-  <% Array(items["active"]).each do |item| %>
-    <%= render partial: "items/item", locals: { item: item } %>
+<%= turbo_frame_tag "items" do %>
+  <%= turbo_frame_tag "active_items" do %>
+    <% Array(items["active"]).each do |item| %>
+      <%= render item %>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= turbo_frame_tag "completed_items" do %>
-  <% Array(items["completed"]).each do |item| %>
-    <%= render partial: "items/item", locals: { item: item } %>
+  <%= turbo_frame_tag "completed_items" do %>
+    <% Array(items["completed"]).each do |item| %>
+      <%= render item %>
+    <% end %>
   <% end %>
 <% end %>

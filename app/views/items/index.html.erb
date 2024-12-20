@@ -12,17 +12,7 @@
     </div>
 
     <div class="flex flex-col">
-      <%= turbo_frame_tag "active_items" do %>
-        <% Array(@items["active"]).each do |item| %>
-          <%= render item %>
-        <% end %>
-      <% end %>
-
-      <%= turbo_frame_tag "completed_items" do %>
-        <% Array(@items["completed"]).each do |item| %>
-          <%= render item %>
-        <% end %>
-      <% end %>
+      <%= render partial: "items", locals: { items: @items } %>
     </div>
 
     <%= render partial: "footer", locals: { active_count: Item.active.count } %>
