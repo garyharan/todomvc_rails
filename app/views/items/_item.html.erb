@@ -1,13 +1,12 @@
-<div id="<%= dom_id item %>" class="flex items-center bg-white <%= item.completed? ? 'text-slate-400' : 'text-slate-600' %> w-[550px] text-2xl h-[65px] shadow border group">
-  <%= complete_button(item) %>
+<%= turbo_frame_tag item do %>
+  <div id="<%= dom_id item, :display %>" class="flex items-center bg-white <%= item.completed? ? 'text-slate-400' : 'text-slate-600' %> w-[550px] text-2xl h-[65px] shadow border group">
+    <%= complete_button(item) %>
 
-  <p class="font-sans font-normal <%= item.completed? ? 'line-through' : '' %> ml-4"><%= item.body %></p>
+    <p class="font-sans font-normal <%= item.completed? ? 'line-through' : '' %> ml-4"><%= item.body %></p>
 
-  <div class="ml-auto mr-4 hidden group-hover:block">
-    <%= button_to item, method: :delete, class: 'text-slate-400 px-4 py-2 rounded' do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-      </svg>
-    <% end %>
+    <div class="hidden flex-row ml-auto mr-4 group-hover:flex">
+      <%= button_to edit_icon, edit_item_path(item), method: :get, data: { turbo_frame: item }, class: 'text-slate-400 px-4 py-2 rounded' %>
+      <%= button_to delete_icon, item, method: :delete, class: 'text-slate-400 px-4 py-2 rounded' %>
+    </div>
   </div>
-</div>
+<% end %>

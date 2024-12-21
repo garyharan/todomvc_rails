@@ -1,24 +1,51 @@
-# README
+# TodoMVC using Rails/Hotwire
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repo is a standard Rails & Hotwire application showing what can be done in the frontend without any
+custom Javascript.
 
-Things you may want to cover:
+Like the examples on https://todomvc.com except this one is actually a full stack application with persistence and
+everything.
 
-* Ruby version
+| Feature                  | Rails/Hotwire                         | Frontend Frameworks                     |
+|--------------------------|---------------------------------------|-----------------------------------------|
+| Persistence              | Yes                                   | Depends on backend integration          |
+| Frontend Updates         | Yes (via Hotwire)                     | Yes                                     |
+| Works with JS turned off | Yes                                   | No                                      |
+| Complexity               | Lower                                 | Higher                                  |
+| Custom Javascript        | Not required                          | Required                                |
+| Learning Curve           | Easier for Rails developers           | Steeper, especially for backend devs    |
+| Performance              | Good, with server-side rendering      | Good, with client-side rendering        |
+| SEO                      | Better, due to server-side rendering  | Requires additional setup for SSR       |
 
-* System dependencies
 
-* Configuration
+## Setup
 
-* Database creation
+To run the application in development mode, follow these steps:
 
-* Database initialization
+1. **Clone the repository:**
+  ```sh
+  git clone https://github.com/garyharan/todomvc_rails.git
+  cd todomvc_rails
+  ```
 
-* How to run the test suite
+2. **Install dependencies:**
+  ```sh
+  bundle install
+  yarn install
+  ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. **Set up the database:**
+  ```sh
+  rails db:create
+  rails db:migrate
+  ```
 
-* Deployment instructions
+4. **Start the Rails server:**
+  ```sh
+  rails server
+  ```
 
-* ...
+5. **Visit the application:**
+  Open your web browser and go to `http://localhost:3000`.
+
+You should now see the TodoMVC application running in development mode.

@@ -49,6 +49,13 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should update" do
+    patch item_url(@item), params: { item: { body: "Updated body", completed_at: @item.completed_at } }
+    @item.reload
+    assert_equal "Updated body", @item.body
+    assert_redirected_to item_url(@item)
+  end
+
   test "should toggle item completedness" do
     patch toggle_completed_item_url(@item)
     @item.reload

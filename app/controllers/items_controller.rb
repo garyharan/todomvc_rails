@@ -27,9 +27,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
+  end
+
   def update
     respond_to do |format|
       if @item.update(item_params)
+        format.turbo_stream
         format.html { redirect_to @item, notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else

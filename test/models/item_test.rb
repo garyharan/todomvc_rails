@@ -12,8 +12,7 @@ class ItemTest < ActiveSupport::TestCase
 
     grouped_items = Item.grouped
 
-    assert_equal grouped_items["active"].map(&:id), [active_item].map(&:id), "Active item should be in the active group"
-    assert_equal grouped_items["completed"].map(&:id), [completed_item].map(&:id), "Completed item should be in the completed group"
+    assert_equal grouped_items["active"].map(&:id), [ active_item ].map(&:id), "Active item should be in the active group"
+    assert_equal grouped_items["completed"].map(&:id), [ completed_item ].map(&:id), "Completed item should be in the completed group"
   end
-
 end
