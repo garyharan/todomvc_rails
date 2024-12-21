@@ -1,13 +1,19 @@
-<% content_for :title, "Editing item" %>
+<% content_for :title, "TodoMVC Rails - Editing item" %>
 
-<h1>Editing item</h1>
+<div class="flex flex-col mx-auto w-[550px]">
+  <h1 class="font-sans text-custom-red text-[80px] text-center font-extralight leading-[100%] mt-8 mb-8">todos</h1>
 
-<%= turbo_frame_tag @item do %>
-  <%= render "form", item: @item %>
-<% end %>
+  <h2 class="font-sans text-2xl text-center font-light m-8>Editing item</h2>
 
-<br>
+  <div class="flex flex-col">
+    <%= turbo_frame_tag @item do %>
+      <%= render "form", item: @item %>
+    <% end %>
 
-<div>
-  <%= link_to "Back to items", items_path %>
+    <br>
+
+    <div>
+      <%= link_to "Back to items", items_path %>
+    </div>
+  </div>
 </div>
