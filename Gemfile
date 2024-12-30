@@ -63,4 +63,4 @@ group :test do
   gem "rails-controller-testing"
 end
 
-gem "tailwindcss-rails", "~> 3.0"
+gem "tailwindcss-rails", "~> 3.1"
